@@ -17,6 +17,9 @@ let AdminUpdate=()=>{
     setIsActive(!isActive);
   }
 
+  const clearLocalStorage=()=>{
+    window.localStorage.clear();
+   }
   useEffect(()=>{
     setUrlId(localStorage.getItem("urlId"))
     setId(localStorage.getItem("id"));
@@ -52,7 +55,7 @@ let AdminUpdate=()=>{
             <div className="company">    
                 <a href="">   
                          <span className="icon"><img src={valtechLogo} alt="valtech-logo" width="20" height="20" className="logo"/>  </span>                  
-                        <span className="company-name">Valtech_</span>
+                        <span className="company-name">v_book</span>
                 </a>    
             </div>  
             <hr/>
@@ -76,6 +79,14 @@ let AdminUpdate=()=>{
                     </a>
                 </li>
                 <li>
+            <a href="/adminseat">
+              <span className="icon">
+                <ion-icon name="desktop-sharp"></ion-icon>
+              </span>
+              <span className="name">Seats</span>
+            </a>
+          </li>
+                <li>
                     <a href="/adminreports">
                         <span className="icon"><ion-icon name="keypad"></ion-icon></span>
                         <span className="name">Reports</span>
@@ -84,7 +95,7 @@ let AdminUpdate=()=>{
                 <li>
                     <a href="/">
                         <span className="icon"><ion-icon name="log-out-sharp"></ion-icon></span>
-                        <span className="name">Log Out</span>
+                        <span className="name" onClick={clearLocalStorage}>Log Out</span>
                     </a>
                 </li>
             </ul>

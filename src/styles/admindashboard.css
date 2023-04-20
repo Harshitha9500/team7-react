@@ -15,13 +15,13 @@
     /* overflow-y: scroll; */
     background-color: rgba(0, 0, 0, 0.733);      
     transition:0.3s;
-    /* flex-grow: 1; */
+    flex-grow: 1;
 }
 .navigation.active{
 	width: 60px;
 	overflow: hidden;
     /* height:100%; */
-    /* flex-grow: 1; */
+    flex-grow: 1;
   }
   .navigation.active .company img{
     text-align: center;
@@ -83,12 +83,12 @@
 }
 .main{
     width: calc(100% - 180px);
-    /* flex-grow: 1; */
+    flex-grow: 1;
 
 }
 .main.active{
     width: calc(100% - 60px);
-    /* flex-grow: 1; */
+    flex-grow: 1;
 }
 .main .header{  
     /* border:1px solid red; */

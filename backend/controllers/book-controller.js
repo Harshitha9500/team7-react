@@ -47,6 +47,7 @@ const updateBooking=async (req,res)=>{
 }
 
 const getBooking=async(req,res)=>{
+    // console.log(req.params.id)
     try {
         let id=req.params.id;
         const bookData=await bookModel.findOne({id:id})
@@ -73,6 +74,36 @@ const updateCheckInTime=async (req,res)=>{
         res.status(400).send({success:false,message:error.message});
     }
 }
+
+const getUserBooking=async(req,res)=>{
+    console.log(req.params.id);
+    try {
+        let id=req.params.id;
+        const userData=await bookModel.find({userId:id})
+        res.status(200).send({success:true,message:'Booking Updated',data:userData}); 
+        
+    } catch (error) {
+        res.status(400).send({success:false,message:error.message});
+    }
+}
+
+const getBookingsByDate=async(req,res)=>{
+   let a = req.body
+    try {
+        const userData=await bookModel.find({$and:[{fromDate: a.fromDate},{toDate:a.toDate}]})
+        console.log(userData);
+        // let id=userData._id;
+        // console.log(id);
+        // const data=await bookModel.findById({_id:_id})
+        // console.log(data);
+        res.status(200).send({success:true,message:'Date Updated',data:userData}); 
+        
+        
+    } catch (error) {
+        res.status(400).send({success:false,message:error.message});
+    }
+}
 export {
-    getAllBookings,createBooking,updateBooking,getBooking,updateCheckInTime
+    getAllBookings,createBooking,updateBooking,getBooking,updateCheckInTime,getUserBooking,
+    getBookingsByDate
 }

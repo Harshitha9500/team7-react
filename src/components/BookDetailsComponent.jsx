@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { updateBookings, updateUserBooking, updateUsers, userRecords } from "../api";
+import { updateBookedSeats, updateBookings, updateUserBooking, updateUsers, userRecords } from "../api";
 import '../styles/bookdetails.css'
 
 let BookDetails=()=>{
@@ -54,6 +54,16 @@ let BookDetails=()=>{
     // if(updatedResponse.data.success==true){
     //   console.log("booking updated")
     // }
+
+    let sentFloor=userData.booking.floor;
+    let sentSeat=userData.booking.seat;
+    console.log(sentFloor,sentSeat)
+    let floorData={
+      floor:sentFloor,
+      seat:sentSeat
+    }
+    const updateBookSeat=await updateBookedSeats(floorData)
+    console.log(updateBookSeat);
     
  }
 

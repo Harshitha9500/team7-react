@@ -16,6 +16,7 @@ let Book=()=>{
     id:'',name:'',email:'',phone:'',role:'',password:'',booking:{id:'0',type:'0' ,fromDate: '0',toDate:'0',shift:'0',floor: '0',seat:'0',status:false}
       
   })
+  const [value,setValue]=useState("false");
   console.log(userData)
 
   const logData=async ()=>{
@@ -34,6 +35,8 @@ let Book=()=>{
     const today = new Date();
     const formattedDate = today.toISOString().substr(0, 10);
     setMinDate(formattedDate);
+    setValue("true")
+    console.log(value);
   }
 
   useEffect(() => {
@@ -47,6 +50,9 @@ let Book=()=>{
     }
   }, [from]);
 
+  const handleTodate=()=>{
+    setValue("true")
+  }
 
 const clearLocalStorage=()=>{
   window.localStorage.clear();
@@ -122,11 +128,11 @@ const handleSubmit=(e)=>{
                 <label for="type">Select type of requests</label>
               </div>
               <div className="form-floating mb-3">
-                <input type="date" className="form-control" name="from" id="from" required onChange={(e)=>setFrom(e.target.value)} min={minDate} onFocus={handleMinDate}/>
+                <input type="date" className="form-control" name="from" id="from" required onChange={(e)=>setFrom(e.target.value)} min={minDate}  onFocus={handleMinDate}/>
                 <label for="from">From Date</label>
               </div>
               <div className="form-floating mb-3">
-                <input type="date" className="form-control" name="to" id="to" value={to} required readOnly/>
+                <input type="date" className="form-control" name="to" id="to" value={to} required disabled={value}/>
                 <label for="to">To Date</label>
               </div>
               <div className="form-floating mb-3">

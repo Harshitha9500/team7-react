@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import '../styles/admindashboard.css';
 import valtechLogo from '../assets/valtech-logo.jpg'
-import { createSeats, fetchSeats } from "../api";
+import { createSeats, deleteSeats, fetchSeats } from "../api";
 
 let AdminSeat=()=>{
     const [isActive, setIsActive] = useState(false);
@@ -24,6 +24,10 @@ let AdminSeat=()=>{
     setIsClicked(!isClicked);
   }
 
+  const clearLocalStorage=()=>{
+    window.localStorage.clear();
+   }
+
   const handleSubmit=async (e)=>{
     e.preventDefault();
     let data={
@@ -41,20 +45,31 @@ let AdminSeat=()=>{
       e.target.reset();
   }
 
-  const handleUpdate=()=>{
-
+  const handleUpdate=async (id,floor,seats)=>{
+    localStorage.setItem("id", id);
+    localStorage.setItem("floor", floor);
+    localStorage.setItem("seats", seats);
+    window.location="/seatupdate";
   }
 
-  const handleDelete=()=>{
-
-  }
+  const handleDelete = async (id) => {
+    // alert(id)
+    const deleteResponse = await deleteSeats(id);
+    if (deleteResponse.data.success == true) {
+      alert("Seat information deleted successfully");
+      window.location = "/adminseat";
+    } else {
+      alert("Failed deleting seat information");
+    }
+    window.location = "/adminseat";
+  };
     return(
         <div className="admin-container">
         <div className={`navigation ${isActive ? 'active' : ''}`}>
             <div className="company">    
                 <a href="">   
                          <span className="icon"><img src={valtechLogo} alt="valtech-logo" width="20" height="20" className="logo"/>  </span>                  
-                        <span className="company-name">Valtech_</span>
+                        <span className="company-name">v_book</span>
                 </a>    
             </div>  
             <hr/>
@@ -92,7 +107,7 @@ let AdminSeat=()=>{
                 <li>
                     <a href="/">
                         <span className="icon"><ion-icon name="log-out-sharp"></ion-icon></span>
-                        <span className="name">Log Out</span>
+                        <span className="name" onClick={clearLocalStorage}>Log Out</span>
                     </a>
                 </li>
             </ul>
@@ -126,8 +141,6 @@ let AdminSeat=()=>{
                           <th scope="col">#</th>
                           <th scope="col">Floor Name</th>
                           <th scope="col">Total Seats</th>
-                          <th scope="col">Booked seats</th>
-                          
                           <th></th>
                           <th></th>
                         </tr>
@@ -136,13 +149,11 @@ let AdminSeat=()=>{
                         { data && (
                           data.map((item,idx)=>{
                             return(
-                              <tr key={item.id}>
+                              <tr key={idx}>
                                 <th scope="row">{idx+1}</th>
                                 <td>{item.floor}</td>
                                 <td>{item.seats}</td>
-                                <td>{item.bookedSeats}</td>
-                                
-                                <td><button className="btn btn-success" onClick={()=>handleUpdate(item._id,item.id,item.name,item.email,item.phone,item.role,item.password)}>Edit</button></td>
+                                <td><button className="btn btn-success" onClick={()=>handleUpdate(item._id,item.floor,item.seats)}>Edit</button></td>
                                 <td><button className="btn btn-danger" onClick={()=>handleDelete(item._id)}>Delete</button></td>
                               </tr>
                             )

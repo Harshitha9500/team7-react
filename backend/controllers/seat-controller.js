@@ -54,6 +54,47 @@ const updateSeatBooked=async(req,res)=>{
     }
 }
 
+const removeBooked=async(req,res)=>{
+    console.log(req.body);
+    try {
+        const update= await seatModel.findOneAndUpdate({floor:req.body.floor},{
+            $pull:{
+                bookedSeats:req.body.seat
+            }
+        },{ new: true });
+        res.status(200).send({success:true,message:'Seat Updated',data:update});
+    } catch (error) {
+        res.status(400).send({success:false,message:error.message});
+    }
+}
+
+const deleteSeat=async(req,res)=>{
+    try{
+        const id=req.params.id;
+        await seatModel.deleteOne({_id:id});
+        res.status(200).send({success:true,message:'Seat deleted successfully'});
+    }catch(error){
+        res.status(400).send({success:false,message:error.message});
+    }
+};
+
+const updateSeat=async(req,res)=>{
+    console.log(req.body);
+    try{       
+        let id=req.body.id; 
+        let floor=req.body.floor;
+        let seats=req.body.seat;
+         const updateSeat=await seatModel.findByIdAndUpdate({_id:id},{$set:{
+            floor:floor,
+            seats:seats
+        }})
+        res.status(200).send({success:true,message:'Seat Updated',data:updateSeat});
+
+    }catch(error){
+        res.status(400).send({success:false,message:error.message});
+    }
+}
+
 export{
-    getAllSeats,createSeat,getSeatInfo,updateSeatBooked,
+    getAllSeats,createSeat,getSeatInfo,updateSeatBooked,removeBooked,deleteSeat,updateSeat,
 }
