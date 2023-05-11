@@ -5,7 +5,7 @@ import { fetchBookings } from "../api";
 
 let AdminDashboard = () => {
   const [isActive, setIsActive] = useState(false);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
 
   function toggleSidebar() {
     setIsActive(!isActive);
@@ -104,7 +104,7 @@ let AdminDashboard = () => {
           
 
         </div>
-        {  ( data.status==="active")  ? 
+        
         <div className="table-container table-responsive">
           <table className="table table-hover">
             <thead className="table-dark">
@@ -146,9 +146,7 @@ let AdminDashboard = () => {
             </tbody>
           </table>
         </div>
-        : 
-        <div>No records found</div>
-        }
+        
       </div>
     </div>
   );

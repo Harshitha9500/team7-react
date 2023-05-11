@@ -6,7 +6,6 @@ import connectDb from './mongodb/connect.js';
 import Userrouter from './routes/employee-routes.js';
 import SeatRouter from './routes/seat-route.js';
 import BookRouter from './routes/book-route.js';
-import AdminRouter from './routes/admin-route.js'
 
 const app = express();
 dotenv.config();
@@ -22,7 +21,6 @@ app.get('/',(req,res)=>{
 app.use("/employees",Userrouter);
 app.use("/seats",SeatRouter);
 app.use("/bookings",BookRouter);
-app.use("/admindata",AdminRouter)
 
 const startServer=async()=>{
     try{

@@ -91,7 +91,7 @@ const getBookingsByDate=async(req,res)=>{
    let a = req.body
     try {
         const userData=await bookModel.find({$and:[{fromDate: a.fromDate},{toDate:a.toDate}]})
-        console.log(userData);
+        // console.log(userData);
         // let id=userData._id;
         // console.log(id);
         // const data=await bookModel.findById({_id:_id})

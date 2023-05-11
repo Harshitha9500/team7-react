@@ -140,12 +140,11 @@ let AdminBooking = () => {
           (bookData.status == "cancelled" || bookData.status == "expired") ? (
             <h4>No Booking available</h4>
           ) : (
-            {if(){
+            
               <div className="table-container table-responsive">
               <table className="table table-hover">
                 <thead className="table-dark">
                   <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Employee ID</th>
                     <th scope="col">Booking ID</th>
                     <th scope="col">Request Type</th>
@@ -166,7 +165,7 @@ let AdminBooking = () => {
                     <td>{bookData.toDate}</td>
                     <td>{bookData.shift}</td>
                     <td>
-                      {bookData.floor}-{bookData.food}
+                      {bookData.floor}-{bookData.seat}
                     </td>
                     <td>{bookData.food}</td>
 
@@ -181,9 +180,7 @@ let AdminBooking = () => {
                   </tr>
                 </tbody>
               </table>
-            </div>
-            }}
-            
+            </div>           
           )}
         </div>
       </div>
